@@ -17,22 +17,22 @@
 
 class KServerSocketFactory {
 public:
-    static KServerSocketAdapter* getSocketAdapter()
+    static KServerSocketAdapter* getServerAdapter()
     {
-        assert(socketAdapter);
+        assert(m_serverAdapter);
         
-        return socketAdapter;
+        return m_serverAdapter;
     }
 private:
     KServerSocketFactory() {}
-    static KServerSocketAdapter* socketAdapter;
+    static KServerSocketAdapter* m_serverAdapter;
 };
 
 #if defined KWIN
-KServerSocketAdapter* KServerSocketFactory::socketAdapter 
+KServerSocketAdapter* KServerSocketFactory::m_serverAdapter 
         = new KWinServerAdapter();
 #else
-KServerSocketAdapter* KServerSocketFactory::socketAdapter 
+KServerSocketAdapter* KServerSocketFactory::m_serverAdapter 
         = new KUnixServerAdapter();
 #endif
 

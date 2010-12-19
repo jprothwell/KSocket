@@ -6,7 +6,12 @@
  *  Copyright 2010 Northeastern University. All rights reserved.
  *
  */
+#ifndef _KUNIXSERVERADAPTER_H_
+#define _KUNIXSERVERADAPTER_H_
+
 #include "knp.h"
+#if defined KUNIX
+
 #include "kserversocketadapter.h"
 #include <stdexcept>
 using std::runtime_error;
@@ -93,3 +98,7 @@ void KUnixServerAdapter::init()
     if (listen(m_svsock, m_backlog) == KSOCKET_ERROR) 
         throw runtime_error("listen error");
 }
+
+#endif
+
+#endif

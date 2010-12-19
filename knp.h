@@ -23,6 +23,8 @@
 
 #else /* Unix/Linux/Mac environment */
 
+#define KUNIX
+
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/socket.h>

@@ -10,6 +10,8 @@
 #define _KUNIXSOCKETADAPTER_H_
 
 #include "knp.h"
+#if defined KUNIX
+
 #include "ksocketadapter.h"
 #include <stdexcept>
 using std::runtime_error;
@@ -72,5 +74,6 @@ private:
     
 };
 
+#endif
 
 #endif
