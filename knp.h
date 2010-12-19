@@ -21,7 +21,7 @@
 #pragma comment (lib, "Mswsock.lib")
 #pragma comment (lib, "AdvApi32.lib")
 
-#else /* Unix/Linux/Mac system headers */
+#else /* Unix/Linux/Mac environment */
 
 #include <unistd.h>
 #include <sys/types.h>
