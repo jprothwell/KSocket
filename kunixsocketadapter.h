@@ -25,7 +25,7 @@ public:
     void connect(const char* addr, int port)
     {
         assert(addr);
-        assert(port > PORT_LOWER_BOUND)
+        assert(port > PORT_LOWER_BOUND);
         
         m_svaddr.sin_family = AF_INET;
         m_svaddr.sin_port   = htons(port);
