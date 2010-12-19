@@ -10,3 +10,4 @@
 
 #define byte char
 
+#define PORT_LEN 5

@@ -21,7 +21,10 @@ public:
             , m_svaddr(0)
             , m_backlog(0)
     {
-        _itoa_s(port, m_port, 5, 10);
+        assert(m_port);
+        assert(port > 1024);
+        
+        _itoa_s(port, m_port, PORT_LEN+1, 10);
         init();
     }
 
@@ -53,8 +56,15 @@ public:
         return size;
     }
     
+    ~KWinServerAdapter()
+    {
+        closesocket(m_svsock);
+        closesocket(m_clsock);
+        WSACleanup();
+    }
+    
 private:
-    char m_port[5];
+    char m_port[PORT_LEN];
     SOCKET m_svsock;
     SOCKET m_clsock;
     int m_backlog;

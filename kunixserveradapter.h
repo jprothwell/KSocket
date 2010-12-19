@@ -24,6 +24,8 @@ public:
     
     int accept()
     {
+        assert(m_svsock);
+        
         socklen_t sin_size = sizeof(struct sockaddr_in);
 		if ((m_clsock = ::accept(m_svsock, 
                 (sockaddr*)&m_claddr, &sin_size)) == -1) 
@@ -34,6 +36,8 @@ public:
     
     int send(byte data[], size_t len)
     {
+        assert(data);
+        
         size_t size;
         if ((size = ::send(m_clsock, data, len, 0)) == -1) 
             throw runtime_error("send error");
@@ -43,6 +47,8 @@ public:
     
     int receive(byte data[], size_t len)
     {
+        assert(data);
+        
         size_t size;
         if ((size = recv(m_clsock, data, len , 0)) == -1)
             throw runtime_error("receive error");
@@ -53,6 +59,8 @@ public:
     
     ~KUnixServerAdapter()
     {
+        close(m_svsock);
+        close(m_clsock);
     }
     
 private:
@@ -68,6 +76,8 @@ private:
 
 void KUnixServerAdapter::init()
 {
+    assert(m_port > 1024);
+    
     if ((m_svsock = socket(PF_INET, SOCK_STREAM, 0)) == -1)
         throw runtime_error("socket error");
 

@@ -16,6 +16,8 @@ class KServerSocketFactory {
 public:
     static KServerSocketAdapter* getSocketAdapter()
     {
+        assert(socketAdapter);
+        
         return socketAdapter;
     }
 private:
