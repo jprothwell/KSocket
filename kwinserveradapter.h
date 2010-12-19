@@ -19,7 +19,7 @@ public:
             , m_svaddr(0)
             , m_backlog(0)
     {
-        itoa(port, m_port, 10);
+        _itoa_s(port, m_port, 5, 10);
         init();
     }
 
@@ -28,7 +28,8 @@ public:
         m_clsock = ::accept(m_svsock, (struct sockaddr*)0, (int*)0);
         if (m_clsock == INVALID_SOCKET) 
             throw runtime_error("Accept error");
-    
+        
+        return 1;
     }
 
     int send(byte* data, size_t len)

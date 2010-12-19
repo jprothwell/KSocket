@@ -26,9 +26,9 @@ public:
     {
         socklen_t sin_size = sizeof(struct sockaddr_in);
 		if ((m_clsock = ::accept(m_svsock, 
-                (sockaddr*)&m_claddr, &sin_size)) == -1) {
+                (sockaddr*)&m_claddr, &sin_size)) == -1) 
 			throw runtime_error("accept error");
-		}
+		
         return 1;
     }
     
