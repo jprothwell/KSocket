@@ -6,6 +6,9 @@
  *  Copyright 2010 Northeastern University. All rights reserved.
  *
  */
+#ifndef _KSERVERSOCKETADAPTER_H_
+#define _KSERVERSOCKETADAPTER_H_
+
 #include "ktype.h"
 
 class KServerSocketAdapter {
@@ -16,3 +19,5 @@ public:
     
     virtual ~KServerSocketAdapter(){}
 };
+
+#endif
