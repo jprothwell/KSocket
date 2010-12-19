@@ -7,3 +7,5 @@
  *
  */
 
+#include "kserversocketfactory.h"
+#include "ksocketadapterfactory.h"
