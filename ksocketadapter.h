@@ -1,5 +1,5 @@
 /*
- *  ksocket.h
+ *  ksocketadapter.h
  *  ksocket
  *
  *  Created by Kewei He on 12/14/10.
