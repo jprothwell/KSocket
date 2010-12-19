@@ -8,8 +8,8 @@
 #include <assert.h>
 
 #if defined (_WIN32) || (WIN32) || (_MSC_VER)
-
-#define KWIN
+ 
+#define KWIN /* Windows environment */
 
 #define WIN32_LEAN_AND_MEAN
 
@@ -17,12 +17,12 @@
 #include <winsock2.h>
 #include <ws2tcpip.h>
 
-// Need to link with Ws2_32.lib, Mswsock.lib, and Advapi32.lib
 #pragma comment (lib, "Ws2_32.lib")
 #pragma comment (lib, "Mswsock.lib")
 #pragma comment (lib, "AdvApi32.lib")
 
-#else
+#else /* Unix/Linux/Mac system headers */
+
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -31,6 +31,6 @@
 #include <sys/wait.h>
 #include <netdb.h>
 
-#endif
+#endif // KWIN
 
-#endif
+#endif // _KNP_H_
