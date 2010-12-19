@@ -22,7 +22,7 @@ public:
             , m_backlog(0)
     {
         assert(m_port);
-        assert(port > 1024);
+        assert(port > PORT_LOWER_BOUND);
         
         _itoa_s(port, m_port, PORT_LEN+1, 10);
         init();
@@ -39,18 +39,22 @@ public:
 
     int send(byte* data, size_t len)
     {
-        size_t size;
-        if ((size = ::send(m_clsock, data, len, 0)) == -1) 
-            throw runtime_error("send error");
+        assert(data);
+        
+        size_t size = 0;
+        if ((size = ::send(m_clsock, data, len, 0)) == KSOCKET_ERROR) 
+            throw runtime_error("Send error");
         
         return size;
     }
 
     int receive(byte* data, size_t len)
     {
-        size_t size;
-        if ((size = recv(m_clsock, data, len , 0)) == -1)
-            throw runtime_error("receive error");
+        assert(data);
+        
+        size_t size = 0;
+        if ((size = recv(m_clsock, data, len , 0)) == KSOCKET_ERROR)
+            throw runtime_error("Receive error");
         
         data[size] = 0;
         return size;
@@ -90,22 +94,22 @@ void KWinServerAdapter::init()
 
     res = getaddrinfo(NULL, m_port, &m_hints, &m_svaddr);
     if (res != 0)
-        throw runtime_error("getaddrinfo failed");
+        throw runtime_error("Getaddrinfo error");
 
     m_svsock = socket(m_svaddr->ai_family, m_svaddr->ai_socktype, 
                           m_svaddr->ai_protocol);
     if (m_svsock == INVALID_SOCKET)
-        throw runtime_error("socket failed");
+        throw runtime_error("Socket error");
 
     res = bind(m_svsock, m_svaddr->ai_addr, (int)m_svaddr->ai_addrlen);
     if (res == SOCKET_ERROR)
-        throw runtime_error("bind error");
+        throw runtime_error("Bind error");
 
     freeaddrinfo(m_svaddr);
 
     res = listen(m_svsock, m_backlog);
     if (res == SOCKET_ERROR)
-        throw runtime_error("listen error");
+        throw runtime_error("Listen error");
 
 }
 

@@ -11,3 +11,7 @@
 #define byte char
 
 #define PORT_LEN 5
+
+#define PORT_LOWER_BOUND 1024
+
+#define KSOCKET_ERROR -1
