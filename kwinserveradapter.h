@@ -7,6 +7,8 @@
  *
  */
 #include "knp.h"
+#if defined KWIN
+
 #include "kserversocketadapter.h"
 #include <stdexcept>
 using std::runtime_error;
@@ -50,9 +52,7 @@ public:
         data[size] = 0;
         return size;
     }
-
-
-
+    
 private:
     char m_port[5];
     SOCKET m_svsock;
@@ -99,3 +99,4 @@ void KWinServerAdapter::init()
 
 }
 
+#endif

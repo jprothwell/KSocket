@@ -6,6 +6,8 @@
  *  Copyright 2010 Newsloch. All rights reserved.
  *
  */
+#ifndef _KSERVERSOCKETFACTORY_H_
+#define _KSERVERSOCKETFACTORY_H_
 
 #include "kunixserveradapter.h"
 #include "kwinserveradapter.h"
@@ -28,3 +30,5 @@ KServerSocketAdapter* KServerSocketFactory::socketAdapter
 KServerSocketAdapter* KServerSocketFactory::socketAdapter 
         = new KUnixServerAdapter();
 #endif
+
+#endif // _KSERVERSOCKETFACTORY_H_
