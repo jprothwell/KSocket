@@ -9,8 +9,11 @@
 #ifndef _KSERVERSOCKETFACTORY_H_
 #define _KSERVERSOCKETFACTORY_H_
 
-#include "kunixserveradapter.h"
+#if defined (_WIN32) || (WIN32) || (_MSC_VER)
 #include "kwinserveradapter.h"
+#else
+#include "kunixserveradapter.h"
+#endif
 
 class KServerSocketFactory {
 public:
