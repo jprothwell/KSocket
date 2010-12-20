@@ -15,25 +15,29 @@
 #include "kunixserveradapter.h"
 #endif
 
-class KServerSocketFactory {
+namespace KSocket {
+    
+class ServerSocketFactory {
 public:
-    static KServerSocketAdapter* getServerAdapter()
+    static ServerSocketAdapter* getServerAdapter()
     {
         assert(m_serverAdapter);
         
         return m_serverAdapter;
     }
 private:
-    KServerSocketFactory() {}
-    static KServerSocketAdapter* m_serverAdapter;
+    ServerSocketFactory() {}
+    static ServerSocketAdapter* m_serverAdapter;
 };
 
 #if defined KWIN
-KServerSocketAdapter* KServerSocketFactory::m_serverAdapter 
-        = new KWinServerAdapter();
+ServerSocketAdapter* ServerSocketFactory::m_serverAdapter 
+        = new WinServerAdapter();
 #else
-KServerSocketAdapter* KServerSocketFactory::m_serverAdapter 
-        = new KUnixServerAdapter();
+ServerSocketAdapter* ServerSocketFactory::m_serverAdapter 
+        = new UnixServerAdapter();
 #endif
+    
+}
 
 #endif // _KSERVERSOCKETFACTORY_H_

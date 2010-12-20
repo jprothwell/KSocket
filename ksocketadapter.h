@@ -12,17 +12,20 @@
 
 #include "ktype.h"
 
-class KSocketAdapter {
+namespace KSocket {
+    
+class SocketAdapter {
 public:
     virtual void connect(const char* address, int port) = 0;
     virtual int send(byte data[], size_t len) = 0;
     virtual int receive(byte data[], size_t len) = 0;
     
-    virtual ~KSocketAdapter() 
+    virtual ~SocketAdapter() 
     {
     }
 };
 
+}
 
 #endif
 

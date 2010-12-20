@@ -4,28 +4,29 @@
 #include "kwinsocketadapter.h"
 #include "kunixsocketadapter.h"
 
-class KSocketAdapterFactory {
+namespace KSocket {
+
+class SocketAdapterFactory {
 public:
-    static KSocketAdapter* getSocketAdapter()
+    static SocketAdapter* getSocketAdapter()
     {
         assert(m_socketAdapter);
 
         return m_socketAdapter;
     }
 private:
-    KSocketAdapterFactory() {}
+    SocketAdapterFactory() {}
 
-    static KSocketAdapter* m_socketAdapter;
+    static SocketAdapter* m_socketAdapter;
 };
 
 #ifdef KWIN
-KSocketAdapter* KSocketAdapterFactory::m_socketAdapter
-        = new KWinSocketAdapter();
+SocketAdapter* SocketAdapterFactory::m_socketAdapter
+        = new WinSocketAdapter();
 #else
-KSocketAdapter* KSocketAdapterFactory::m_socketAdapter
-        = new KUnixSocketAdapter();
+SocketAdapter* SocketAdapterFactory::m_socketAdapter
+        = new UnixSocketAdapter();
 #endif
 
-
-
+}
 #endif

@@ -16,9 +16,11 @@
 #include <stdexcept>
 using std::runtime_error;
 
-class KUnixSocketAdapter : public KSocketAdapter {
+namespace KSocket {
+
+class UnixSocketAdapter : public SocketAdapter {
 public:
-    KUnixSocketAdapter() : m_sock(0)
+    UnixSocketAdapter() : m_sock(0)
     {
         if ((m_sock = socket(PF_INET, SOCK_STREAM, 0)) == KSOCKET_ERROR) 
             throw runtime_error("Socket creation error");
@@ -62,7 +64,7 @@ public:
         return size;
     }
     
-    ~KUnixSocketAdapter()
+    ~UnixSocketAdapter()
     {
         close(m_sock);
     }
@@ -73,6 +75,8 @@ private:
     sockaddr_in m_svaddr;
     
 };
+    
+}
 
 #endif
 

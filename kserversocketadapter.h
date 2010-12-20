@@ -11,13 +11,17 @@
 
 #include "ktype.h"
 
-class KServerSocketAdapter {
+namespace KSocket {
+    
+class ServerSocketAdapter {
 public:
     virtual int accept() = 0;
     virtual int send(byte data[], size_t len) = 0;
     virtual int receive(byte data[], size_t len) = 0;
     
-    virtual ~KServerSocketAdapter(){}
+    virtual ~ServerSocketAdapter(){}
 };
+
+}
 
 #endif

@@ -9,9 +9,11 @@
 #include <stdexcept>
 using std::runtime_error;
 
-class KWinSocketAdapter : public KSocketAdapter {
+namespace KSocket{
+    
+class WinSocketAdapter : public SocketAdapter {
 public:
-    KWinSocketAdapter() : m_svsock(0)
+    WinSocketAdapter() : m_svsock(0)
     {
         WSADATA wsaData;
         int res = WSAStartup(MAKEWORD(2,2), &wsaData);
@@ -67,7 +69,7 @@ public:
         return size;
     }
 
-    ~KWinSocketAdapter()
+    ~WinSocketAdapter()
     {
         WSACleanup();
         closesocket(m_svsock);
@@ -80,6 +82,8 @@ private:
     addrinfo m_hints;
 
 };
+    
+}
 
 #endif
 

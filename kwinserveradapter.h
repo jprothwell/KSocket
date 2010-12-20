@@ -13,9 +13,11 @@
 #include <stdexcept>
 using std::runtime_error;
 
-class KWinServerAdapter : public KServerSocketAdapter {
+namespace KSocket {
+    
+class WinServerAdapter : public ServerSocketAdapter {
 public:
-    KWinServerAdapter(int port = 22222)
+    WinServerAdapter(int port = 22222)
             : m_svsock(INVALID_SOCKET)
             , m_clsock(INVALID_SOCKET)
             , m_svaddr(0)
@@ -60,7 +62,7 @@ public:
         return size;
     }
     
-    ~KWinServerAdapter()
+    ~WinServerAdapter()
     {
         closesocket(m_svsock);
         closesocket(m_clsock);
@@ -78,7 +80,7 @@ private:
     void init();
 };
 
-void KWinServerAdapter::init()
+void WinServerAdapter::init()
 {
     WSADATA wsaData;
 
@@ -111,6 +113,8 @@ void KWinServerAdapter::init()
     if (res == SOCKET_ERROR)
         throw runtime_error("Listen error");
 
+}
+    
 }
 
 #endif

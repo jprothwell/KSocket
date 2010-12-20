@@ -16,9 +16,11 @@
 #include <stdexcept>
 using std::runtime_error;
 
-class KUnixServerAdapter : public KServerSocketAdapter {
+namespace KSocket{
+
+class UnixServerAdapter : public ServerSocketAdapter {
 public:
-    KUnixServerAdapter(int port = 22222)
+    UnixServerAdapter(int port = 22222)
             : m_port(port)
             , m_svsock(0)
             , m_clsock(0)
@@ -62,7 +64,7 @@ public:
         return size;
     }
     
-    ~KUnixServerAdapter()
+    ~UnixServerAdapter()
     {
         close(m_svsock);
         close(m_clsock);
@@ -79,7 +81,7 @@ private:
     void init();
 };
 
-void KUnixServerAdapter::init()
+void UnixServerAdapter::init()
 {
     assert(m_port > PORT_LOWER_BOUND);
     
@@ -97,6 +99,8 @@ void KUnixServerAdapter::init()
 
     if (listen(m_svsock, m_backlog) == KSOCKET_ERROR) 
         throw runtime_error("listen error");
+}
+
 }
 
 #endif
