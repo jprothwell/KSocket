@@ -19,24 +19,26 @@ namespace KSocket {
     
 class ServerSocketFactory {
 public:
-    static ServerSocketAdapter* getServerAdapter()
+    static ServerSocketAdapter* createServerAdapter()
     {
-        assert(m_serverAdapter);
-        
-        return m_serverAdapter;
+#if defined KWIN
+        return new WinServerAdapter();
+#else
+        return new UnixServerAdapter();
+#endif
+    }
+    
+    static ServerSocketAdapter* createServerAdapter(int port)
+    {
+#if defined KWIN
+        return new WinServerAdapter(port);
+#else
+        return new UnixServerAdapter(port);
+#endif        
     }
 private:
     ServerSocketFactory() {}
-    static ServerSocketAdapter* m_serverAdapter;
 };
-
-#if defined KWIN
-ServerSocketAdapter* ServerSocketFactory::m_serverAdapter 
-        = new WinServerAdapter();
-#else
-ServerSocketAdapter* ServerSocketFactory::m_serverAdapter 
-        = new UnixServerAdapter();
-#endif
     
 }
 

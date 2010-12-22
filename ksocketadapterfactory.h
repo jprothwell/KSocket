@@ -8,25 +8,17 @@ namespace KSocket {
 
 class SocketAdapterFactory {
 public:
-    static SocketAdapter* getSocketAdapter()
+    static SocketAdapter* createSocketAdapter()
     {
-        assert(m_socketAdapter);
-
-        return m_socketAdapter;
+#ifdef KWIN
+        return new WinSocketAdapter();
+#else
+        return new UnixSocketAdapter();
+#endif
     }
 private:
     SocketAdapterFactory() {}
-
-    static SocketAdapter* m_socketAdapter;
 };
-
-#ifdef KWIN
-SocketAdapter* SocketAdapterFactory::m_socketAdapter
-        = new WinSocketAdapter();
-#else
-SocketAdapter* SocketAdapterFactory::m_socketAdapter
-        = new UnixSocketAdapter();
-#endif
 
 }
 #endif
