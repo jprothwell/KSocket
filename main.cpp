@@ -32,7 +32,7 @@ int main()
     socket.connect("10.0.1.7", 22222);
     while (1) {
         if (socket.receive(buf, buflen))
-            cout << "received " << buf << endl;
+            std::cout << "received " << buf << endl;
         gets(buf);
         socket.send(buf, strlen(buf) + 1);
     }
